@@ -93,10 +93,11 @@
     <button id="open-btn" onclick="showMessage()">Abrir</button>
     <div id="message-container">
       <p class="message">
-        Pensei em você mais do que o normal nesse dia em específico, em como eu queria ter a liberdade de te presentear de um jeito mais especial.
+        Pensei em você mais do que o normal nesse dia em específico, em como eu queria ter a liberdade de te presentear de um jeito mais especial. Podemos até ainda não ser oficialmente namorados, mas amo te tratar e respeitar como uma.
       </p>
       <p class="message">
-        Enquanto isso, só peço que aceite essa lembrancinha que com certeza vai te dar um gás a mais nessa tua volta pra academia. Peço que a cada dia que tomar essas cápsulas, não se sinta mal pelo presente, troque esse pensamento pela lembrança de que tem alguém que gosta e se importa muito com você ❤️
+        Enquanto isso, só peço que aceite essa lembrancinha que com certeza vai te dar um gás a mais agora que voltou para a academia. Peço que a cada dia que tomar essas cápsulas, não se sinta mal pelo presente, 
+		troque esse pensamento pela lembrança de que tem alguém que gosta e se importa muito com você <3️.
       </p>
       <p class="message">
         <i>A única gripe que eu pegaria seria a que vem da sua boca, porque com você até o vírus fica um tesão 🥴🥴</i>
@@ -118,20 +119,31 @@
     }
 
     function showMessage() {
-      const container = document.getElementById("message-container");
-      const button = document.getElementById("open-btn");
+  const container = document.getElementById("message-container");
+  const button = document.getElementById("open-btn");
+  const music = document.getElementById("bg-music");
 
-      // Primeiro mostra o container
-      container.classList.add("pre-anim");
+  // Primeiro mostra o container
+  container.classList.add("pre-anim");
 
-      // Depois de um pequeno delay, ativa a animação
-      setTimeout(() => {
-        container.classList.add("show");
-      }, 50); // 50ms garante que o display foi aplicado
+  // Depois de um pequeno delay, ativa a animação
+  setTimeout(() => {
+    container.classList.add("show");
+  }, 50);
 
-      // Esconde o botão
-      button.style.display = "none";
-    }
+  // Esconde o botão
+  button.style.display = "none";
+
+  // Define o volume e toca a música
+  music.volume = 0.3;
+  music.play().catch((err) => {
+    console.error("Erro ao tentar tocar a música:", err);
+  });
+}
   </script>
+<audio id="bg-music" preload="auto">
+  <source src="VEM_SER_MINHA.mp3" type="audio/mpeg">
+  Seu navegador não suporta áudio HTML5.
+</audio>
 </body>
 </html>
