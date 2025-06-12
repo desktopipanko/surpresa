@@ -25,7 +25,8 @@
       width: 100%;
     }
 
-    .hidden-content {
+    .hidden-content,
+    #message-container {
       display: none;
     }
 
@@ -45,34 +46,66 @@
       color: white;
       border-radius: 5px;
       cursor: pointer;
+      transition: all 0.3s ease;
     }
 
     .message {
       font-size: 1.1rem;
       color: #333;
       margin-top: 1rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
+
+    /* Mostra o container */
+    #message-container.pre-anim {
+      display: block;
+    }
+
+    /* Anima os textos */
+    #message-container.show .message {
+      opacity: 1;
+      transform: translateY(0);
+    }
+	.pulse {
+  display: inline-block;
+  animation: pulse 1.2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
   </style>
 </head>
 <body>
 
   <div class="container" id="auth-container">
-    <h2>Digite a senha para abrir 💌</h2>
+    <h2>Digite a senha 💌</h2>
     <input type="password" id="password" placeholder="Senha...">
     <br>
-    <button onclick="checkPassword()">Abrir</button>
+    <button onclick="checkPassword()">Desbloquear 🗝️</button>
   </div>
 
   <div class="container hidden-content" id="secret-content">
-    <h2>❤️ Para Vic ❤️</h2>
-    <p class="message">Pensei em você mais do que o normal nesse dia em específico, em como eu queria ter a liberdade de te presentear de um jeito mais especial.<p class='message'> Enquanto isso, só peço que aceite essa lembrancinha que 
-	com certeza vai te dar um gás a mais nessa tua volta pra academia. Peço que a cada dia que tomar essas capsulas, não se sinta mal pelo presente, troque esse pensamento pela lembrança de que tem alguém que gosta e se importa 
-	muito com você <3 <br> <p class='message'><i>A única gripe que eu pegaria seria a que vem da sua boca, porque com você até o vírus fica um tesão 🥴🥴</i></p></p>
+    <h2><span class="pulse">❤️</span> Para Vic <span class="pulse">❤️</span></h2>
+    <button id="open-btn" onclick="showMessage()">Abrir</button>
+    <div id="message-container">
+      <p class="message">
+        Pensei em você mais do que o normal nesse dia em específico, em como eu queria ter a liberdade de te presentear de um jeito mais especial.
+      </p>
+      <p class="message">
+        Enquanto isso, só peço que aceite essa lembrancinha que com certeza vai te dar um gás a mais nessa tua volta pra academia. Peço que a cada dia que tomar essas cápsulas, não se sinta mal pelo presente, troque esse pensamento pela lembrança de que tem alguém que gosta e se importa muito com você ❤️
+      </p>
+      <p class="message">
+        <i>A única gripe que eu pegaria seria a que vem da sua boca, porque com você até o vírus fica um tesão 🥴🥴</i>
+      </p>
+    </div>
   </div>
 
   <script>
     const correctPassword = "vitrola";
-	// Você sofrerá as devidas consequências pelos seus atos.
 
     function checkPassword() {
       const input = document.getElementById("password").value;
@@ -82,6 +115,22 @@
       } else {
         alert("Senha incorreta 😬😬😬😬");
       }
+    }
+
+    function showMessage() {
+      const container = document.getElementById("message-container");
+      const button = document.getElementById("open-btn");
+
+      // Primeiro mostra o container
+      container.classList.add("pre-anim");
+
+      // Depois de um pequeno delay, ativa a animação
+      setTimeout(() => {
+        container.classList.add("show");
+      }, 50); // 50ms garante que o display foi aplicado
+
+      // Esconde o botão
+      button.style.display = "none";
     }
   </script>
 </body>
